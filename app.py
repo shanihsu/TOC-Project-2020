@@ -10,11 +10,17 @@ from linebot.models import MessageEvent, TextMessage, TextSendMessage
 from fsm import TocMachine
 from utils import send_text_message
 
+import json
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+
+import requests
+
 load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2"],
+    states=["user", "state1", "state2", "state", "todayweather", "city", "picture", "air", "weekweather", "weekcity", "graph","jump"],
     transitions=[
         {
             "trigger": "advance",
@@ -28,7 +34,67 @@ machine = TocMachine(
             "dest": "state2",
             "conditions": "is_going_to_state2",
         },
-        {"trigger": "go_back", "source": ["state1", "state2"], "dest": "user"},
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "state",
+            "conditions": "is_going_to_state",
+        },
+        {
+            "trigger": "advance",
+            "source": "state",
+            "dest": "todayweather",
+            "conditions": "is_going_to_todayweather",
+        },
+        {
+            "trigger": "advance",
+            "source": "todayweather",
+            "dest": "city",
+            "conditions": "is_going_to_city",
+        },
+        {
+            "trigger": "advance",
+            "source": "state",
+            "dest": "picture",
+            "conditions": "is_going_to_picture",
+        },
+        {
+            "trigger": "advance",
+            "source": "state",
+            "dest": "air",
+            "conditions": "is_going_to_air",
+        },
+        {
+            "trigger": "advance",
+            "source": "state",
+            "dest": "weekweather",
+            "conditions": "is_going_to_weekweather",
+        },
+        {
+            "trigger": "advance",
+            "source": "weekweather",
+            "dest": "weekcity",
+            "conditions": "is_going_to_weekcity",
+        },
+        {
+            "trigger": "advance",
+            "source": "user",
+            "dest": "graph",
+            "conditions": "is_going_to_graph",
+        },
+        {
+            "trigger": "advance",
+            "source": "state",
+            "dest": "jump",
+            "conditions": "is_going_to_jump",
+        },
+        {
+            "trigger": "advance",
+            "source": ["city", "picture", "air","weekcity"],
+            "dest": "state",
+            "conditions": "is_going_back_to_state",
+        },
+        {"trigger": "go_back", "source": ["state1", "state2", "state", "todayweather", "city", "picture", "air", "weekweather","weekcity", "graph", "jump"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
@@ -111,8 +177,19 @@ def webhook_handler():
 
 @app.route("/show-fsm", methods=["GET"])
 def show_fsm():
-    machine.get_graph().draw("fsm.png", prog="dot", format="png")
-    return send_file("fsm.png", mimetype="image/png")
+    try:
+        machine.get_graph().draw("fsm.png", prog="dot", format="png")
+        return send_file("fsm.png", mimetype="image/png")
+    except Exception as ex:
+        # sys.exc_info()[0] 就是用來取出except的錯誤訊息的方法
+        print(ex)
+
+@app.route("/show-week", methods=["GET"])
+def show_week():
+    # city = "嘉義市"
+    # city = request.args.get('city')
+    # print(city)
+    return send_file("week.png", mimetype="image/png")
 
 
 if __name__ == "__main__":
