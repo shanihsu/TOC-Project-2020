@@ -44,7 +44,7 @@ class TocMachine(GraphMachine):
     
     def is_going_to_todayweather(self, event):
         text = event.message.text
-        if text is "今天天氣":
+        if text == "今天天氣":
             return True
         return False
     
@@ -57,7 +57,7 @@ class TocMachine(GraphMachine):
     def is_going_to_city(self, event):
         global city
         temp = event.message.text
-        if temp[0] is "台":
+        if temp[0] == "台":
             tmp = "臺" + temp[1:]
             temp = tmp
         if temp is ("宜蘭縣" or "桃園市" or "新竹縣" or "苗栗縣" or "彰化縣" or "南投縣" or "雲林縣" or "嘉義縣" or "屏東縣" or "臺東縣" or "花蓮縣" or "澎湖縣" or "基隆市" or "新竹市" or "嘉義市" or "臺北市" or "高雄市" or "新北市" or "臺中市" or "臺南市" or "連江縣" or "金門縣"):
@@ -76,7 +76,7 @@ class TocMachine(GraphMachine):
     
     def is_going_to_picture(self, event):
         text = event.message.text
-        if (text is "衛星雲圖"):
+        if (text == "衛星雲圖"):
             return True
         return False
     
@@ -89,7 +89,7 @@ class TocMachine(GraphMachine):
 
     def is_going_to_air(self, event):
         text = event.message.text
-        if (text is "今天空氣品質"):
+        if (text == "今天空氣品質"):
             return True
         return False
     
@@ -102,7 +102,7 @@ class TocMachine(GraphMachine):
 
     def is_going_to_weekweather(self, event):
         text = event.message.text
-        if text is "一周天氣預報":
+        if text == "一周天氣預報":
             return True
         return False
     
@@ -115,7 +115,7 @@ class TocMachine(GraphMachine):
     def is_going_to_weekcity(self, event):
         global city
         temp = event.message.text
-        if temp[0] is "台":
+        if temp[0] == "台":
             tmp = "臺" + temp[1:]
             temp = tmp
         if temp is ("宜蘭縣" or "桃園市" or "新竹縣" or "苗栗縣" or "彰化縣" or "南投縣" or "雲林縣" or "嘉義縣" or "屏東縣" or "臺東縣" or "花蓮縣" or "澎湖縣" or "基隆市" or "新竹市" or "嘉義市" or "臺北市" or "高雄市" or "新北市" or "臺中市" or "臺南市" or "連江縣" or "金門縣"):
