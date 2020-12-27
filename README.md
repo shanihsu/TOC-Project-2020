@@ -1,159 +1,107 @@
-# TOC Project 2020
-
-[![Maintainability](https://api.codeclimate.com/v1/badges/dc7fa47fcd809b99d087/maintainability)](https://codeclimate.com/github/NCKU-CCS/TOC-Project-2020/maintainability)
-
-[![Known Vulnerabilities](https://snyk.io/test/github/NCKU-CCS/TOC-Project-2020/badge.svg)](https://snyk.io/test/github/NCKU-CCS/TOC-Project-2020)
-
-
-Template Code for TOC Project 2020
+# Weather Robot
 
 A Line bot based on a finite state machine
 
-More details in the [Slides](https://hackmd.io/@TTW/ToC-2019-Project#) and [FAQ](https://hackmd.io/s/B1Xw7E8kN)
+This LINE bot is mostly built by [LINE messaging API](https://developers.line.biz/en/docs/messaging-api/overview/), and a little Flask as web application framework to host it on Heroku.
 
-## Setup
+Finite State Machine model is implemeted in Weather Robot. Each feature is represented by a state, and the button that user pressed on the carousel template will trigger the transitions between states. The FSM graph will be mentioned below.
 
-### Prerequisite
-* Python 3.6
-* Pipenv
-* Facebook Page and App
-* HTTPS Server
+This project is based on [NCKU-CCS/TOC-Project-2020](https://github.com/NCKU-CCS/TOC-Project-2020)
 
-#### Install Dependency
-```sh
-pip3 install pipenv
+## 構想
+將[中央氣象局](https://www.cwb.gov.tw/V8/C/)的天氣資訊，以及[空氣品質監測網](https://airtw.epa.gov.tw/)空汙指標，結合在此機器人，可直接透過此機器人查詢氣象和空氣品質相關資訊，不須分開使用兩個網站查詢，增加使用上的便利性。
+## 功能
+* 氣象
+    * 各地今天天氣
+    * 各地一週天氣預報
+    * 即時衛星雲圖
+* 空氣品質
+    * 即時空氣品質指標圖
+*  fsm架構圖
 
-pipenv --three
-
-pipenv install
-
-pipenv shell
-```
-
-* pygraphviz (For visualizing Finite State Machine)
-    * [Setup pygraphviz on Ubuntu](http://www.jianshu.com/p/a3da7ecc5303)
-	* [Note: macOS Install error](https://github.com/pygraphviz/pygraphviz/issues/100)
+## 好友資訊
+* 可直接開啟Line掃描，或是使用Line ID搜尋好友
+![](https://i.imgur.com/0kMFEJv.png)
+* 搜尋到結果後，可加入聊天
+* ![](https://i.imgur.com/wnru1HY.png)
 
 
-#### Secret Data
-You should generate a `.env` file to set Environment Variables refer to our `.env.sample`.
-`LINE_CHANNEL_SECRET` and `LINE_CHANNEL_ACCESS_TOKEN` **MUST** be set to proper values.
-Otherwise, you might not be able to run your code.
 
-#### Run Locally
-You can either setup https server or using `ngrok` as a proxy.
+## 程式使用的技術
+* web crawling
+使用Beautifulsoup4爬取[中央氣象局](https://www.cwb.gov.tw/V8/C/)和[空氣品質監測網](https://airtw.epa.gov.tw/)的資料，包含空汙指標圖及衛星雲圖，並在Line聊天室中以圖片回覆。
+* API
+使用[中央氣象局API](https://opendata.cwb.gov.tw/dist/opendata-swagger.html)上的資料，擷取為JSON格式，並取出相關資料，在line聊天室中以文字回覆。
+* Heroku
+deploy webhooks on Heroku
+* 環境 : python 3.6
 
-#### a. Ngrok installation
-* [ macOS, Windows, Linux](https://ngrok.com/download)
-
-or you can use Homebrew (MAC)
-```sh
-brew cask install ngrok
-```
-
-**`ngrok` would be used in the following instruction**
-
-```sh
-ngrok http 8000
-```
-
-After that, `ngrok` would generate a https URL.
-
-#### Run the sever
-
-```sh
-python3 app.py
-```
-
-#### b. Servo
-
-Or You can use [servo](http://serveo.net/) to expose local servers to the internet.
-
-
-## Finite State Machine
-![fsm](./img/show-fsm.png)
-
-## Usage
+## 操作說明
+* 基本操作
+    * 所有用到英文的指令大小寫皆可
+    * 每結束一次操作，請重新輸入`hi`或`graph`以再次啟動功能
+* 請輸入`hi`或`graph`以啟動功能
+    * `hi`
+    傳回主選單，主選單分為四個功能:
+        * 今天天氣
+        * 今天空氣品質
+        * 一周天氣預報
+        * 衛星雲圖
+    * `graph`
+    傳回fsm圖片
+    * ==輸入非`hi`或`graph` -> 回傳`請輸入hi或graph以啟動功能`==
+* 主選單
+    * 今天天氣
+        * `請輸入您的城市` -> 
+        回傳該城市的今明兩天白天夜晚天氣 -> 
+        請重新輸入`hi`或`graph`以再次啟動功能。
+        * ==輸入`不存在的城市` -> 回傳`該城市不存在，請輸入hi或graph以再次啟動功能`==
+    * 今天空氣品質
+        * 回傳即時空氣品質指標圖 ->
+        請重新輸入`hi`或`graph`以再次啟動功能。
+    * 一周天氣預報
+        * `請輸入您的城市` -> 
+        回傳該城市從當天起一週內的天氣概況 -> 
+        請重新輸入`hi`或`graph`以再次啟動功能。
+        * ==輸入`不存在的城市` -> 回傳`該城市不存在，請輸入hi或graph以再次啟動功能`==
+    * 衛星雲圖
+        * 回傳即時衛星雲圖 ->
+        請重新輸入`hi`或`graph`以再次啟動功能。
+    * ==輸入`非主選單上的四個功能` -> 回傳`請輸入hi或graph以再次啟動功能`==
+## fsm架構圖
+![](https://weatherobot.herokuapp.com/show-fsm)
+### state說明
 The initial state is set to `user`.
 
-Every time `user` state is triggered to `advance` to another state, it will `go_back` to `user` state after the bot replies corresponding message.
+Every time `user` state is triggered to `advance` to final state, it will `go_back` to `user` state after the bot replies corresponding message.
+* `user` :　輸入`hi`或`graph`可進入不同state
+    * 輸入`hi` : 進入`state`state
+    * 輸入`graph` : 進入`graph`state
+* `graph` : 回傳fsm架構圖
+* `state` : 回傳主選單，可依據使用者需求，選擇四個不同的功能
+* `todayweather` : 選單上`今天天氣`的功能，回傳`請輸入您的城市`
+* `city` : 根據使用者輸入的城市，回傳該城市今明兩天白天夜晚的天氣狀況
+* `weekweather` : 選單上`一周天氣預報`的功能，回傳`請輸入您的城市`
+* `weekcity` : 根據使用者輸入的城市，回傳該城市從當天起一週內的天氣狀況
+* `picture` : 選單上`衛星雲圖`的功能，回傳即時衛星雲圖
+* `air` : 選單上`今天空氣品質`的功能，回傳即時空氣品質指標圖
 
-* user
-	* Input: "go to state1"
-		* Reply: "I'm entering state1"
-
-	* Input: "go to state2"
-		* Reply: "I'm entering state2"
-
-## Deploy
-Setting to deploy webhooks on Heroku.
-
-### Heroku CLI installation
-
-* [macOS, Windows](https://devcenter.heroku.com/articles/heroku-cli)
-
-or you can use Homebrew (MAC)
-```sh
-brew tap heroku/brew && brew install heroku
-```
-
-or you can use Snap (Ubuntu 16+)
-```sh
-sudo snap install --classic heroku
-```
-
-### Connect to Heroku
-
-1. Register Heroku: https://signup.heroku.com
-
-2. Create Heroku project from website
-
-3. CLI Login
-
-	`heroku login`
-
-### Upload project to Heroku
-
-1. Add local project to Heroku project
-
-	heroku git:remote -a {HEROKU_APP_NAME}
-
-2. Upload project
-
-	```
-	git add .
-	git commit -m "Add code"
-	git push -f heroku master
-	```
-
-3. Set Environment - Line Messaging API Secret Keys
-
-	```
-	heroku config:set LINE_CHANNEL_SECRET=your_line_channel_secret
-	heroku config:set LINE_CHANNEL_ACCESS_TOKEN=your_line_channel_access_token
-	```
-
-4. Your Project is now running on Heroku!
-
-	url: `{HEROKU_APP_NAME}.herokuapp.com/callback`
-
-	debug command: `heroku logs --tail --app {HEROKU_APP_NAME}`
-
-5. If fail with `pygraphviz` install errors
-
-	run commands below can solve the problems
-	```
-	heroku buildpacks:set heroku/python
-	heroku buildpacks:add --index 1 heroku-community/apt
-	```
-
-	refference: https://hackmd.io/@ccw/B1Xw7E8kN?type=view#Q2-如何在-Heroku-使用-pygraphviz
-
-## Reference
-[Pipenv](https://medium.com/@chihsuan/pipenv-更簡單-更快速的-python-套件管理工具-135a47e504f4) ❤️ [@chihsuan](https://github.com/chihsuan)
-
-[TOC-Project-2019](https://github.com/winonecheng/TOC-Project-2019) ❤️ [@winonecheng](https://github.com/winonecheng)
-
-Flask Architecture ❤️ [@Sirius207](https://github.com/Sirius207)
-
-[Line line-bot-sdk-python](https://github.com/line/line-bot-sdk-python/tree/master/examples/flask-echo)
+## 使用畫面
+* ### 加入好友歡迎頁面
+![](https://i.imgur.com/Pg2se8g.png)
+* ### 輸入hi後，主選單頁面
+![](https://i.imgur.com/E11lF3m.png)
+* ### 點選主選單中的`今天天氣`
+![](https://i.imgur.com/wU8XCme.png)
+* ### 輸入城市格式錯誤畫面
+![](https://i.imgur.com/rzX3Q0n.png)
+* ### 點選主選單中的`一周天氣預報`
+![](https://i.imgur.com/D2ly537.png)
+* ### 點選主選單中的`今天空氣品質`
+![](https://i.imgur.com/cGRAXko.png)
+* ### 點選主選單中的`衛星雲圖`
+![](https://i.imgur.com/Hw5qZGS.png)
+* ### 輸入`graph`後，fsm架構圖
+![](https://i.imgur.com/YsAr9FY.png)
+* ### 輸入錯誤時的畫面
+![](https://i.imgur.com/eO9Wa5y.png)
