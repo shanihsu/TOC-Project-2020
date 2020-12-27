@@ -75,7 +75,7 @@ class TocMachine(GraphMachine):
             self.go_back()
         except Exception as ex:
             self.go_back()
-            send_text_message(reply_token, "請輸入hi或graph")
+            send_text_message(reply_token, "此城市不存在，請輸入hi或graph以重新啟動功能")
             print(ex)
     
     def is_going_to_picture(self, event):
@@ -138,6 +138,8 @@ class TocMachine(GraphMachine):
         #self.go_state(event)
             self.go_back()    
         except Exception as ex:
+            self.go_back()
+            send_text_message(reply_token, "此城市不存在，請輸入hi或graph以重新啟動功能")
             print(ex)
         
 
