@@ -68,7 +68,7 @@ machine = TocMachine(
             "dest": "graph",
             "conditions": "is_going_to_graph",
         },
-        {"trigger": "go_back", "source": ["todayweather", "city", "picture", "air", "weekweather","weekcity", "graph"], "dest": "user"},
+        {"trigger": "go_back", "source": ["todayweather", "city", "picture", "air", "weekweather","weekcity", "graph", "user", "state"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
