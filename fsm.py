@@ -69,6 +69,7 @@ class TocMachine(GraphMachine):
     def on_enter_city(self, event):
         print("I'm entering city")
         global city
+        print(city)
         reply_token = event.reply_token
         send_text_message(reply_token, today(city))
         #self.go_state(event)
