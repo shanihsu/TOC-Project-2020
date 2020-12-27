@@ -60,7 +60,7 @@ class TocMachine(GraphMachine):
         if temp[0] == "台":
             tmp = "臺" + temp[1:]
             temp = tmp
-        if temp is ("宜蘭縣" or "桃園市" or "新竹縣" or "苗栗縣" or "彰化縣" or "南投縣" or "雲林縣" or "嘉義縣" or "屏東縣" or "臺東縣" or "花蓮縣" or "澎湖縣" or "基隆市" or "新竹市" or "嘉義市" or "臺北市" or "高雄市" or "新北市" or "臺中市" or "臺南市" or "連江縣" or "金門縣"):
+        if temp == ("宜蘭縣" or "桃園市" or "新竹縣" or "苗栗縣" or "彰化縣" or "南投縣" or "雲林縣" or "嘉義縣" or "屏東縣" or "臺東縣" or "花蓮縣" or "澎湖縣" or "基隆市" or "新竹市" or "嘉義市" or "臺北市" or "高雄市" or "新北市" or "臺中市" or "臺南市" or "連江縣" or "金門縣"):
             city = temp
             return True
         else:
@@ -118,7 +118,7 @@ class TocMachine(GraphMachine):
         if temp[0] == "台":
             tmp = "臺" + temp[1:]
             temp = tmp
-        if temp is ("宜蘭縣" or "桃園市" or "新竹縣" or "苗栗縣" or "彰化縣" or "南投縣" or "雲林縣" or "嘉義縣" or "屏東縣" or "臺東縣" or "花蓮縣" or "澎湖縣" or "基隆市" or "新竹市" or "嘉義市" or "臺北市" or "高雄市" or "新北市" or "臺中市" or "臺南市" or "連江縣" or "金門縣"):
+        if temp == ("宜蘭縣" or "桃園市" or "新竹縣" or "苗栗縣" or "彰化縣" or "南投縣" or "雲林縣" or "嘉義縣" or "屏東縣" or "臺東縣" or "花蓮縣" or "澎湖縣" or "基隆市" or "新竹市" or "嘉義市" or "臺北市" or "高雄市" or "新北市" or "臺中市" or "臺南市" or "連江縣" or "金門縣"):
             city = temp
             return True
         else:
