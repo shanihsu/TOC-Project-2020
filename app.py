@@ -11,8 +11,6 @@ from fsm import TocMachine
 from utils import send_text_message
 
 import json
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 
 import requests
 
