@@ -70,7 +70,6 @@ class TocMachine(GraphMachine):
         global city
         reply_token = event.reply_token
         send_text_message(reply_token, today(city))
-        send_text_message(reply_token, "請輸入hi或graph")
         #self.go_state(event)
         self.go_back()
     
@@ -84,7 +83,6 @@ class TocMachine(GraphMachine):
         print("I'm entering picture")
         reply_token = event.reply_token
         send_image_message(reply_token, cloudpicture())
-        send_text_message(reply_token, "請輸入hi或graph")
         #self.go_state(event)
         self.go_back()
 
@@ -98,7 +96,6 @@ class TocMachine(GraphMachine):
         print("I'm entering air")
         reply_token = event.reply_token
         send_image_message(reply_token, airpicture())
-        send_text_message(reply_token, "請輸入hi或graph")
         #self.go_state(event)
         self.go_back()
 
@@ -133,7 +130,6 @@ class TocMachine(GraphMachine):
         #week(city)
         #send_image_message(reply_token, "https://5be4cb182235.ngrok.io/show-week")
             send_text_message(reply_token, week(city))
-            send_text_message(reply_token, "請輸入hi或graph")
         #self.go_state(event)
             self.go_back()    
         except Exception as ex:
@@ -148,6 +144,5 @@ class TocMachine(GraphMachine):
         print("I'm entering graph")
         reply_token = event.reply_token
         send_image_message(reply_token, "https://weatherobot.herokuapp.com/show-fsm")
-        send_text_message(reply_token, "請輸入hi或graph")
         self.go_back()
     
