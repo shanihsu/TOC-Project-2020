@@ -131,23 +131,21 @@ def webhook_handler():
         events = parser.parse(body, signature)
     except InvalidSignatureError:
         abort(400)
-    try:
-        # if event is MessageEvent and message is TextMessage, then echo text
-        for event in events:
-            if not isinstance(event, MessageEvent):
-                continue
-            if not isinstance(event.message, TextMessage):
-                continue
-            if not isinstance(event.message.text, str):
-                continue
-            print(f"\nFSM STATE: {machine.state}")
-            print(f"REQUEST BODY: \n{body}")
-            response = machine.advance(event)
-            if response == False:
-                send_text_message(event.reply_token, "請輸入hi或graph")
-                machine.go_back()
-    except Exception as ex:
-        print(ex)
+    
+    # if event is MessageEvent and message is TextMessage, then echo text
+    for event in events:
+        if not isinstance(event, MessageEvent):
+            continue
+        if not isinstance(event.message, TextMessage):
+            continue
+        if not isinstance(event.message.text, str):
+            continue
+        print(f"\nFSM STATE: {machine.state}")
+        print(f"REQUEST BODY: \n{body}")
+        response = machine.advance(event)
+        if response == False:
+            send_text_message(event.reply_token, "請輸入hi或graph")
+            machine.go_back()
 
     return "OK"
 

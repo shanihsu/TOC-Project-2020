@@ -66,12 +66,16 @@ class TocMachine(GraphMachine):
             return False
     
     def on_enter_city(self, event):
-        print("I'm entering city")
-        global city
-        reply_token = event.reply_token
-        send_text_message(reply_token, today(city))
-        #self.go_state(event)
-        self.go_back()
+        try:
+            print("I'm entering city")
+            global city
+            reply_token = event.reply_token
+            send_text_message(reply_token, today(city))
+            #self.go_state(event)
+            self.go_back()
+        except Exception as ex:
+            self.go_back()
+            print(ex)
     
     def is_going_to_picture(self, event):
         text = event.message.text
