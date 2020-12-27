@@ -141,6 +141,6 @@ class TocMachine(GraphMachine):
     def on_enter_graph(self, event):
         print("I'm entering graph")
         reply_token = event.reply_token
-        send_image_message(reply_token, "https://5be4cb182235.ngrok.io/show-fsm")
+        send_image_message(reply_token, "https://weatherobot.herokuapp.com/show-fsm")
         self.go_back()
     
