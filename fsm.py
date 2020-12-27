@@ -40,7 +40,7 @@ class TocMachine(GraphMachine):
         ]
         url = 'https://i.imgur.com/tyOAIAG.png'
         send_button_message(event.reply_token, title, text, btn, url)
-        #self.go_back()
+        
     
     def is_going_to_todayweather(self, event):
         text = event.message.text
