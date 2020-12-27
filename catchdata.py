@@ -1,8 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 import json
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
 
 def cloudpicture():
     response = requests.get("https://www.cwb.gov.tw/V8/C/W/OBS_Radar.html")
