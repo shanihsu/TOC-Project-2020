@@ -88,20 +88,20 @@ Every time `user` state is triggered to `advance` to final state, it will `go_ba
 
 ## 使用畫面
 * ### 加入好友歡迎頁面
-![](https://i.imgur.com/Pg2se8g.png)
+![](https://i.imgur.com/PtMqJX6.png)
 * ### 輸入hi後，主選單頁面
-![](https://i.imgur.com/E11lF3m.png)
+![](https://i.imgur.com/Jt8ppR1.png)
 * ### 點選主選單中的`今天天氣`
-![](https://i.imgur.com/wU8XCme.png)
+![](https://i.imgur.com/BC4HraH.png)
 * ### 輸入城市格式錯誤畫面
-![](https://i.imgur.com/rzX3Q0n.png)
+![](https://i.imgur.com/gjx1bSC.png)
 * ### 點選主選單中的`一周天氣預報`
-![](https://i.imgur.com/D2ly537.png)
+![](https://i.imgur.com/tgG0oZp.png)
 * ### 點選主選單中的`今天空氣品質`
-![](https://i.imgur.com/cGRAXko.png)
+![](https://i.imgur.com/tobNaOi.png)
 * ### 點選主選單中的`衛星雲圖`
-![](https://i.imgur.com/Hw5qZGS.png)
+![](https://i.imgur.com/bC7wkql.png)
 * ### 輸入`graph`後，fsm架構圖
-![](https://i.imgur.com/YsAr9FY.png)
+![](https://i.imgur.com/UhP7IJa.png)
 * ### 輸入錯誤時的畫面
-![](https://i.imgur.com/eO9Wa5y.png)
+![](https://i.imgur.com/BFUvQIs.png)
