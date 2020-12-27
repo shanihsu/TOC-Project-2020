@@ -52,29 +52,32 @@ def week(city):
             target_station = item
     WeatherData = target_station["weatherElement"]
     text = ["day", "night","day", "night","day", "night","day", "night","day", "night","day", "night","day", "night"]
+    
     for i in range(14):
-        if WeatherData[0]["time"][i+1]["startTime"][12] == "8":
-            text[i] = "night"
-        elif WeatherData[0]["time"][i+1]["startTime"][12] == "6":
-            text[i] = "day"
-        text[i] = str(int(WeatherData[0]["time"][i+1]["startTime"][5:7])) +"/" + str(int(WeatherData[0]["time"][i+1]["startTime"][8:10])) + "\n" + text[i]
-    """
+        if WeatherData[0]["time"][i]["endTime"][12] == "8":
+            text[i] = "白天"
+        elif WeatherData[0]["time"][i]["endTime"][12] == "6":
+            text[i] = "晚上"
+        text[i] = str(int(WeatherData[0]["time"][i]["startTime"][5:7])) +"/" + str(int(WeatherData[0]["time"][i]["startTime"][8:10])) + " " + text[i] + "\n"
+    
     result = ""
-    for i in range(14):
-        result = result + "\n" + text[i] + WeatherData[10]["time"][i+1]["elementValue"][0]["value"]
-    print(result)
-    return result
-
-    """
+    
     maxT = []
     minT = []
     for i in range(14):
         maxT.append(0)
         minT.append(0)
     for i in range(14):
-        minT[i] = int(WeatherData[8]["time"][i+1]["elementValue"][0]["value"])
-        maxT[i] = int(WeatherData[12]["time"][i+1]["elementValue"][0]["value"])
-    
+        minT[i] = int(WeatherData[8]["time"][i]["elementValue"][0]["value"])
+        maxT[i] = int(WeatherData[12]["time"][i]["elementValue"][0]["value"])
+    for i in range(14):
+        result = result + "\n" + text[i] + WeatherData[6]["time"][i]["elementValue"][0]["value"] + "\n"
+        result = result + "攝氏" + str(minT[i]) + "°C ~ " + str(maxT[i]) + "°C\n"
+
+    print(result)
+    return result
+
+"""
     #plot
     plt.figure(figsize=(20,10))
     plt.ylim(0, 40)
@@ -87,3 +90,4 @@ def week(city):
         plt.text(a, b, b, ha='center', va='bottom', fontsize=20)
         plt.text(a, c, c, ha='center', va='bottom', fontsize=20)
     plt.savefig("week.png", format = "png")
+"""

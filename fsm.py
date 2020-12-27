@@ -13,34 +13,6 @@ class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
         self.machine = GraphMachine(model=self, **machine_configs)
 
-    def is_going_to_state1(self, event):
-        text = event.message.text
-        return text.lower() == "go to state1"
-
-    def is_going_to_state2(self, event):
-        text = event.message.text
-        return text.lower() == "go to state2"
-
-    def on_enter_state1(self, event):
-        print("I'm entering state1")
-
-        reply_token = event.reply_token
-        send_text_message(reply_token, "Trigger state1")
-        self.go_back()
-
-    def on_exit_state1(self):
-        print("Leaving state1")
-
-    def on_enter_state2(self, event):
-        print("I'm entering state2")
-
-        reply_token = event.reply_token
-        send_text_message(reply_token, "Trigger state2")
-        self.go_back()
-
-    def on_exit_state2(self):
-        print("Leaving state2")
-
     def is_going_to_state(self, event):
         text = event.message.text
         return text.lower() == "hi"
@@ -98,7 +70,7 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_text_message(reply_token, today(city))
         #self.go_state(event)
-        #self.go_back()
+        self.go_back()
     
     def is_going_to_picture(self, event):
         text = event.message.text
@@ -111,7 +83,7 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_image_message(reply_token, cloudpicture())
         #self.go_state(event)
-        #self.go_back()
+        self.go_back()
 
     def is_going_to_air(self, event):
         text = event.message.text
@@ -124,7 +96,7 @@ class TocMachine(GraphMachine):
         reply_token = event.reply_token
         send_image_message(reply_token, airpicture())
         #self.go_state(event)
-        #self.go_back()
+        self.go_back()
 
     def is_going_to_weekweather(self, event):
         text = event.message.text
@@ -150,17 +122,16 @@ class TocMachine(GraphMachine):
     
     def on_enter_weekcity(self, event):
         print("I'm entering city")
-        #try:
-        global city
-        reply_token = event.reply_token
-            #url = "https://1c18da9ad04d.ngrok.io/show-week?city=" + str(city)
-        week(city)
-        send_image_message(reply_token, "https://4c5a50959ccc.ngrok.io/show-week")
-            #send_text_message(reply_token, week(city))
+        try:
+            global city
+            reply_token = event.reply_token
+        #week(city)
+        #send_image_message(reply_token, "https://5be4cb182235.ngrok.io/show-week")
+            send_text_message(reply_token, week(city))
         #self.go_state(event)
-            #self.go_back()    
-        #except Exception as ex:
-            #print(ex)
+            self.go_back()    
+        except Exception as ex:
+            print(ex)
         
 
     def is_going_to_graph(self, event):
@@ -170,19 +141,6 @@ class TocMachine(GraphMachine):
     def on_enter_graph(self, event):
         print("I'm entering graph")
         reply_token = event.reply_token
-        send_image_message(reply_token, "https://4c5a50959ccc.ngrok.io/show-fsm")
-        self.go_back()
-        
-    def is_going_to_jump(self, event):
-        text = event.message.text
-        if text == "跳出功能列表":
-            return True
-        return False
-    
-    def on_enter_jump(self, event):
-        print("I'm entering jump")
-        reply_token = event.reply_token
+        send_image_message(reply_token, "https://5be4cb182235.ngrok.io/show-fsm")
         self.go_back()
     
-    def is_going_back_to_state(self, event):
-        return True

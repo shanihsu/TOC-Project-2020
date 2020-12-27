@@ -20,20 +20,8 @@ load_dotenv()
 
 
 machine = TocMachine(
-    states=["user", "state1", "state2", "state", "todayweather", "city", "picture", "air", "weekweather", "weekcity", "graph","jump"],
+    states=["user", "todayweather", "city", "picture", "air", "weekweather", "weekcity", "graph", "state"],
     transitions=[
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "state1",
-            "conditions": "is_going_to_state1",
-        },
-        {
-            "trigger": "advance",
-            "source": "user",
-            "dest": "state2",
-            "conditions": "is_going_to_state2",
-        },
         {
             "trigger": "advance",
             "source": "user",
@@ -82,19 +70,7 @@ machine = TocMachine(
             "dest": "graph",
             "conditions": "is_going_to_graph",
         },
-        {
-            "trigger": "advance",
-            "source": "state",
-            "dest": "jump",
-            "conditions": "is_going_to_jump",
-        },
-        {
-            "trigger": "advance",
-            "source": ["city", "picture", "air","weekcity"],
-            "dest": "state",
-            "conditions": "is_going_back_to_state",
-        },
-        {"trigger": "go_back", "source": ["state1", "state2", "state", "todayweather", "city", "picture", "air", "weekweather","weekcity", "graph", "jump"], "dest": "user"},
+        {"trigger": "go_back", "source": ["todayweather", "city", "picture", "air", "weekweather","weekcity", "graph"], "dest": "user"},
     ],
     initial="user",
     auto_transitions=False,
