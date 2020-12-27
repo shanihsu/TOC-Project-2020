@@ -7,7 +7,7 @@ from catchdata import cloudpicture, airpicture, today, week
 from flask import Flask, jsonify, request, abort, send_file
 
 #global variable
-city = ""
+city = "嘉義市"
 
 class TocMachine(GraphMachine):
     def __init__(self, **machine_configs):
@@ -56,11 +56,12 @@ class TocMachine(GraphMachine):
 
     def is_going_to_city(self, event):
         global city
-        city = event.message.text
-        if city[0] == "台":
-            tmp = "臺" + city[1:]
-            city = tmp
-        if city == "宜蘭縣" or "桃園市" or "新竹縣" or "苗栗縣" or "彰化縣" or "南投縣" or "雲林縣" or "嘉義縣" or "屏東縣" or "臺東縣" or "花蓮縣" or "澎湖縣" or "基隆市" or "新竹市" or "嘉義市" or "臺北市" or "高雄市" or "新北市" or "臺中市" or "臺南市" or "連江縣" or "金門縣":
+        temp = event.message.text
+        if temp[0] == "台":
+            tmp = "臺" + temp[1:]
+            temp = tmp
+        if temp == "宜蘭縣" or "桃園市" or "新竹縣" or "苗栗縣" or "彰化縣" or "南投縣" or "雲林縣" or "嘉義縣" or "屏東縣" or "臺東縣" or "花蓮縣" or "澎湖縣" or "基隆市" or "新竹市" or "嘉義市" or "臺北市" or "高雄市" or "新北市" or "臺中市" or "臺南市" or "連江縣" or "金門縣":
+            city = temp
             return True
         else:
             return False
@@ -113,11 +114,12 @@ class TocMachine(GraphMachine):
 
     def is_going_to_weekcity(self, event):
         global city
-        city = event.message.text
-        if city[0] == "台":
-            tmp = "臺" + city[1:]
-            city = tmp
-        if city == "宜蘭縣" or "桃園市" or "新竹縣" or "苗栗縣" or "彰化縣" or "南投縣" or "雲林縣" or "嘉義縣" or "屏東縣" or "臺東縣" or "花蓮縣" or "澎湖縣" or "基隆市" or "新竹市" or "嘉義市" or "臺北市" or "高雄市" or "新北市" or "臺中市" or "臺南市" or "連江縣" or "金門縣":
+        temp = event.message.text
+        if temp[0] == "台":
+            tmp = "臺" + temp[1:]
+            temp = tmp
+        if temp == "宜蘭縣" or "桃園市" or "新竹縣" or "苗栗縣" or "彰化縣" or "南投縣" or "雲林縣" or "嘉義縣" or "屏東縣" or "臺東縣" or "花蓮縣" or "澎湖縣" or "基隆市" or "新竹市" or "嘉義市" or "臺北市" or "高雄市" or "新北市" or "臺中市" or "臺南市" or "連江縣" or "金門縣":
+            city = temp
             return True
         else:
             return False
